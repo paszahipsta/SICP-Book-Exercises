@@ -4,18 +4,12 @@
 
 #lang scheme
 
-(define (new-if predicate then-clause else-clause)
-  (cond (predicate then-clause)
-        (else else-clause)))
 
 (define (square x)
   (* x x))
 
-(define (prev-guess x guess)
-  (* (- x (* guess x)) 2))
-
 (define (good-enough? guess x)
-  (< (/ (- guess (prev-guess guess x))) 0.01))
+  (< (abs(/ (- guess (improve guess x)) guess)) 0.0001)) ;use improve function to calculate next guess.
 
 (define (average x y)
   ( / (+ x y) 2))
@@ -31,7 +25,6 @@
 (define (sqrt x)
   (sqrt-iter 1.0 x))
 
-(improve 1.5 2)
-
-(prev-guess (improve 1.5 2) 2)
-;Calculated 0.032, correct should be 0.01
+;;solution work better for small and big numbers, because it's based on previous guess not x. 
+(sqrt 0.01)
+ 
